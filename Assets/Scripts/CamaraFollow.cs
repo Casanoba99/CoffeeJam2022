@@ -7,16 +7,17 @@ public class CamaraFollow : MonoBehaviour
     Vector2 initPos = new Vector2(1.25f, 0);
 
     public Transform target;
-    public Vector3 seguirV3;
+    public Vector3 offset;
+    public float suavizado;
 
     void Start()
     {
-        transform.position = initPos;
+        //transform.position = initPos;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        seguirV3 = new Vector2(transform.position.x + target.position.x, transform.position.y);
-        transform.position = seguirV3 + new Vector3(0, 0, -10);
+        Vector3 camPos = offset + target.position;
+        transform.position = Vector3.Lerp(transform.position, camPos, suavizado * Time.deltaTime);
     }
 }
