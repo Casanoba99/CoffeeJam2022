@@ -31,16 +31,10 @@ public class LanzarTaza : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                click = true;
                 GameManager.manager.SumarIntento();
 
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).gameObject.SetActive(false);
-                }
-
-                click = true;
-                fuerzaImg.enabled = false;
-                marcoImg.enabled = false;
+                QuitarBarra();
                 rbTaza.AddForce(Vector2.right * (fuerzaImg.fillAmount * factorFuerza), ForceMode2D.Impulse);
                 rbTaza.GetComponent<Taza>().lanzada = true;
             }
@@ -63,6 +57,27 @@ public class LanzarTaza : MonoBehaviour
 
             if (timer <= 0) cambiar = false;
         }
+    }
 
+    public void QuitarBarra()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        fuerzaImg.enabled = false;
+        marcoImg.enabled = false;
+    }
+
+    public void PonerBarra()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+        }
+
+        fuerzaImg.enabled = true;
+        marcoImg.enabled = true;
     }
 }

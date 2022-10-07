@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class CamaraFollow : MonoBehaviour
 {
-    Vector2 initPos = new Vector2(1.25f, 0);
-
     public Transform target;
     public Vector3 offset;
     public float suavizado;
-
-    void Start()
-    {
-        //transform.position = initPos;
-    }
 
     void FixedUpdate()
     {
