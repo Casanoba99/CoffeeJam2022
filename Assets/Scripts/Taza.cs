@@ -28,6 +28,8 @@ public class Taza : MonoBehaviour
                 GameManager.manager.ReiniciarIntento();
             }
         }
+
+        if (transform.position.y < -1.5f) GameManager.manager.ReiniciarIntento();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

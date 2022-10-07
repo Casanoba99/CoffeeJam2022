@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Incrementos")]
     public LanzarTaza lanzar;
-    public int incrFuerza;
+    public float incrFuerza;
     public Transform rango;
     public Transform meta;
     public int incrDistancia;
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
             case Estados.Menu:
                 // Poner Menu
                 title.SetActive(true);
-                musicaI.gameObject.SetActive(true);
+                musicaI.enabled = true;
                 empezarB.SetActive(true);
                 ajustesB.SetActive(true);
                 CerrarAjustes();
@@ -101,7 +100,7 @@ public class GameManager : MonoBehaviour
             case Estados.InGame:
                 // Quitar Menu
                 title.SetActive(false);
-                musicaI.gameObject.SetActive(false);
+                musicaI.enabled = false;
                 empezarB.SetActive(false);
                 ajustesB.SetActive(false);
                 // Textos
@@ -176,7 +175,9 @@ public class GameManager : MonoBehaviour
         aciertos++;
         PlayerPrefs.SetInt("aciertos", aciertos);
         aciertosTxt.text = "" + aciertos;
+
         lanzar.factorFuerza += incrFuerza;
+        PlayerPrefs.SetFloat("fuerza", lanzar.factorFuerza);
 
         ReiniciarIntento();
 
@@ -196,6 +197,8 @@ public class GameManager : MonoBehaviour
             Vector2 box = new Vector2(incrParallax, 0);
             back3.GetComponent<BoxCollider2D>().size += box;
         }
+
+        PlayerPrefs.Save();
     }
 
     public void SumarIntento()
@@ -203,6 +206,7 @@ public class GameManager : MonoBehaviour
         intentos++;
         PlayerPrefs.SetInt("intentos", intentos);
         intentosTxt.text = "" + intentos;
+        PlayerPrefs.Save();
     }
 
     void SetPosicionPlato()

@@ -15,12 +15,13 @@ public class LanzarTaza : MonoBehaviour
     public Image fuerzaImg;
     public Image marcoImg;
     public Rigidbody2D rbTaza;
-    public int factorFuerza;
+    public float factorFuerza;
     public float tiempoTotal;
 
     void Start()
     {
         fuerzaImg.fillAmount = 0;
+        if (PlayerPrefs.GetFloat("fuerza") > 0) factorFuerza = PlayerPrefs.GetFloat("fuerza");
     }
 
     void Update()
